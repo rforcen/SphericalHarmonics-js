@@ -1,0 +1,67 @@
+<!-- https://www.tutorialspoint.com/webgl/webgl_sample_application.htm -->
+<!doctype html>
+
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+
+<body>
+    <canvas width="1024" height="768" id="canvas"></canvas>
+
+    <script src="gl-matrix.js"></script>
+    <script src="sh_codes.js"></script>
+    <script src="vector.js"></script>
+    <script src="sh_f32a.js"></script>
+    <script src="webgl-sh.js"></script>
+    <script>
+        function max_canvas() {
+            canvas = document.getElementById("canvas")
+            canvas.width = document.body.clientWidth
+            canvas.height = document.body.clientHeight
+        }
+
+        function set_mouse_events() {
+            function onDocMouseMove(e) {
+                var ev = e ? e : window.event
+                mouseX = ev.clientX
+                mouseY = ev.clientY
+            }
+
+            function onDocMouseDown(e) {
+                isMouseDown = true;
+                console.log(`selecting mouse ${mouseX}, ${mouseY}`)
+                return false;
+            }
+
+            function onDocMouseUp(e) {
+                isMouseDown = true;
+                return false;
+            }
+            document.onmousedown = onDocMouseDown
+            document.onmouseup = onDocMouseUp
+            document.onmousemove = onDocMouseMove
+        }
+    </script>
+    <script>
+        var squareRotation = 0.0,
+            delay = 0.0004
+        const res = 256 * 2,
+            cmap = 4,
+            c_index = 69
+        var isMouseDown = false
+        var mouseX, mouseY
+
+        set_mouse_events()
+        max_canvas()
+
+        var sh = new SphericalHarmonics(res, cmap, c_index)
+
+        main(sh.mesh)
+    </script>
+
+</body>
+
+</html>
