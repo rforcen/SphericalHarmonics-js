@@ -1,2 +1,2 @@
 # SphericalHarmonics-js
-js spherical harmonics based on Float32Array
+js / webgl spherical harmonics based on Float32Array
